@@ -112,12 +112,12 @@ response_from_api = {
     "Verdict": "Benign"
 } # assume that we get this response from the service
 
-command_results = CommandResults(
+results = CommandResults(
     outputs_prefix='ThreatStream.Analysis',
     outputs_key_field='ReportID',
     outputs=response_from_api
 )
-return_results(command_result)
+return_results(results)
 ```
 
 :::note
@@ -1095,7 +1095,7 @@ ip_reputations_from_autofocus = [
     }
 ]
 
-command_results_list: List[CommandResults] = []
+results_list: List[CommandResults] = []
 
 for ip_reputation in ip_reputations_from_autofocus:
     if ip_reputation['confidence'] >= 90:
@@ -1118,14 +1118,14 @@ for ip_reputation in ip_reputations_from_autofocus:
         dbot_score=dbot_score
     )
 
-    command_results_list.append(CommandResults(
+    results_list.append(CommandResults(
         outputs_prefix='Autofocus.IP',
         outputs_key_field='indicator',
         outputs=ip_reputation,
         indicator=ip
     ))
 
-return_results(command_results_list)
+return_results(results_list)
 ```
 
 **Context Data - The way it is stored in the incident context data**
